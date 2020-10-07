@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5f9dd69c-1818-4260-9c6c-b34234f53e9b" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1iExHCtNoJMxmyRa2nbpLuqhDTW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="params_vs_xai" is-module-sdk="true" working-directory="$PROJECT_DIR$">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="params_vs_xai" />
+        <option name="myWorkingDirectory" value="$PROJECT_DIR$" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Documents\GitHub\params_vs_xai" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.train_compute_evi">
+    <configuration name="train_compute" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="params_vs_xai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="E:\Documents\GitHub\params_vs_xai\venv\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_compute.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_compute_evi" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="params_vs_xai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_compute_evi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.train_compute_evi" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5f9dd69c-1818-4260-9c6c-b34234f53e9b" name="Default Changelist" comment="" />
+      <created>1601486463299</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1601486463299</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="583" y="280" width="1092" height="834" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601584367421">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="583" y="280" width="1092" height="834" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601584367421" />
+    <state x="1010" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601957271597">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1010" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601957271597" />
+    <state x="667" y="453" key="#xdebugger.XInspectDialog" timestamp="1601492679964">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="667" y="453" key="#xdebugger.XInspectDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601492679964" />
+    <state x="789" y="470" key="EnvironmentVariablesDialog" timestamp="1601486591120">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="789" y="470" key="EnvironmentVariablesDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601486591120" />
+    <state x="701" y="458" key="FileChooserDialogImpl" timestamp="1602003581016">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="701" y="458" key="FileChooserDialogImpl/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602003581016" />
+    <state width="2539" height="375" key="GridCell.Tab.0.bottom" timestamp="1602093791983">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="375" key="GridCell.Tab.0.bottom/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
+    <state width="2539" height="375" key="GridCell.Tab.0.center" timestamp="1602093791982">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="375" key="GridCell.Tab.0.center/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791982" />
+    <state width="2539" height="375" key="GridCell.Tab.0.left" timestamp="1602093791982">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="375" key="GridCell.Tab.0.left/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791982" />
+    <state width="2539" height="375" key="GridCell.Tab.0.right" timestamp="1602093791982">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="375" key="GridCell.Tab.0.right/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791982" />
+    <state width="2539" height="375" key="GridCell.Tab.1.bottom" timestamp="1602093791983">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="375" key="GridCell.Tab.1.bottom/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
+    <state width="2539" height="375" key="GridCell.Tab.1.center" timestamp="1602093791983">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="375" key="GridCell.Tab.1.center/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
+    <state width="2539" height="375" key="GridCell.Tab.1.left" timestamp="1602093791983">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="375" key="GridCell.Tab.1.left/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
+    <state width="2539" height="375" key="GridCell.Tab.1.right" timestamp="1602093791983">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2539" height="375" key="GridCell.Tab.1.right/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
+    <state x="546" y="357" key="SettingsEditor" timestamp="1601943298025">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="546" y="357" key="SettingsEditor/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601943298025" />
+    <state width="1288" height="708" key="XDebugger.FullValuePopup" timestamp="1601956957068">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="1288" height="708" key="XDebugger.FullValuePopup/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601956957068" />
+    <state x="842" y="429" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1601492370936">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="842" y="429" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601492370936" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train_compute_evi.py</url>
+          <line>136</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
