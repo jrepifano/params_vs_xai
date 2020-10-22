@@ -59,7 +59,7 @@ class EVI_Conv2D(nn.Module):
                                    groups, bias, padding_mode)
         nn.init.normal_(self.mean_conv.weight, mean=mean_mu, std=mean_sigma)
 
-        self.sigma_conv_weight = torch.zeros([1,out_channels])
+        self.sigma_conv_weight = nn.Parameter(torch.zeros([1, out_channels]), requires_grad=True)
         nn.init.uniform_(self.sigma_conv_weight, a=sigma_min, b=sigma_max)
 
         self.unfold = nn.Unfold(kernel_size, dilation, padding, stride)
@@ -133,7 +133,7 @@ class EVI_Relu(nn.Module):
         :param inplace:         (Default  False)
         """
         super(EVI_Relu, self).__init__()
-        self.relu = nn.SELU(inplace)
+        self.relu = nn.ReLU(inplace)
 
     def forward(self, mu, sigma):
         """
@@ -182,7 +182,7 @@ class EVI_Maxpool(nn.Module):
         :param ceil_mode:       Ceiling Mode    (Default  False)
         """
         super(EVI_Maxpool, self).__init__()
-        self.mu_maxPooling = nn.MaxPool2d(kernel_size, stride, padding, dilation, return_indices, ceil_mode)
+        self.maxPooling = nn.MaxPool2d(kernel_size, stride, padding, dilation, return_indices, ceil_mode)
 
     def forward(self, mu, sigma):
         """
@@ -193,32 +193,19 @@ class EVI_Maxpool(nn.Module):
         :param sigma:   Data Sigma    (Required)
         :type  sigma:   Float
         """
+        mu_p, argmax1 = self.maxPooling(mu)
 
-        image_size = torch.tensor(mu.shape[-1])
-        shape_numel = mu.shape[1:].numel()
-        channels = mu.shape[1]
-        mu_p, argmax = self.mu_maxPooling(mu)
+        argmax = argmax1.reshape(argmax1.shape[0], argmax1.shape[1], argmax1.shape[2] ** 2)
 
-        post_max_image_size = torch.tensor(mu_p.shape[-1]) ** 2
-        argmax = argmax.view(-1, channels, post_max_image_size)
-        indexFix = torch.arange(0, channels).reshape(1, channels, 1).repeat(mu_p.shape[0], 1, int(post_max_image_size)) * image_size ** 2
+        argmax_indices = argmax.repeat(1, 1, argmax.shape[-1]).reshape(argmax.shape[0], argmax.shape[1], argmax.shape[-1], argmax.shape[-1])
 
-        new_ind = argmax + indexFix
+        index_fix = argmax.unsqueeze(3) * sigma.shape[-1]
+        sigma_indexes = argmax_indices + index_fix
 
-        new_sigma = sigma.reshape(mu_p.shape[0], shape_numel, -1)
-        new_tensor = torch.ones(())
-        column2 = new_tensor.new_empty([argmax.shape[0], argmax.shape[1], argmax.shape[2], new_sigma.shape[-1]]).float()
-
-        for i in range(new_sigma.shape[0]):
-            column2[i, :] = new_sigma[i, new_ind[i, :]]
-
-        column3 = column2.permute([0, 1, 3, 2])
-        column4 = column3.reshape(mu_p.shape[0], shape_numel, -1)
-
-        sigma_p = new_tensor.new_empty([argmax.shape[0], argmax.shape[1], argmax.shape[2], argmax.shape[2]]).float()
-        for i in range(new_sigma.shape[0]):
-            sigma_p[i, :] = column4[i, new_ind[i, :]]
-
+        sigma_p = torch.gather(sigma.reshape(argmax.shape[0], argmax.shape[1], -1),
+                               dim=2,
+                               index=sigma_indexes.reshape(argmax.shape[0], argmax.shape[1], -1)).reshape(argmax.shape[0],  argmax.shape[1],
+                                                                                                          argmax.shape[2], argmax.shape[2])
         return mu_p, sigma_p
 
 
@@ -258,9 +245,9 @@ class EVI_FullyConnected(nn.Module):
         nn.init.normal_(self.mean_fc.weight, mean=mean_mu, std=mean_sigma)
         self.mean_fc.bias.data.fill_(mean_bias)
 
-        self.sigma_fc_weight = torch.zeros([1,out_features])
+        self.sigma_fc_weight = nn.Parameter(torch.zeros([1, out_features]), requires_grad=True)
         nn.init.uniform_(self.sigma_fc_weight, a=sigma_min, b=sigma_max)
-        self.sigma_fc_bias = torch.nn.Parameter(torch.tensor(sigma_bias), requires_grad=True)
+        self.sigma_fc_bias = nn.Parameter(torch.tensor(sigma_bias), requires_grad=True)
 
     def forward(self, mu, sigma=0):
         """

@@ -31,34 +31,36 @@ class data_loader(Dataset):
 
 
 class EVINet(nn.Module):
-    def __init__(self, n_feats, num_nodes):
+    def __init__(self, n_feats, num_nodes, batch_size):
         super(EVINet, self).__init__()
-
-        self.fullyCon1 = EVI_FullyConnected(n_feats, num_nodes, input_flag=True)
-        self.fullyCon2 = EVI_FullyConnected(num_nodes, 2, input_flag=False)
+        self.batch_size = batch_size
+        self.fullyCon1 = EVI_FullyConnected(n_feats, num_nodes, input_flag=True).to('cuda:0')
+        self.fullyCon2 = EVI_FullyConnected(num_nodes, 2, input_flag=False).to('cuda:1')
         self.relu = EVI_Relu()
         # self.bn1 = nn.BatchNorm1d(31)
         # self.bn2 = nn.BatchNorm1d(61)
         self.softmax = EVI_Softmax(1)
 
+        self.register_buffer("thing", torch.tensor(1e-3).repeat([self.fullyCon2.out_features]))
+
     def forward(self, x_input):
         flat_x = torch.flatten(x_input, start_dim=1)
-        flat_x.requires_grad = True
-        mu, sigma = self.fullyCon1.forward(flat_x)
+        # flat_x.requires_grad = True
+        mu, sigma = self.fullyCon1.forward(flat_x.to('cuda:0'))
         mu, sigma = self.relu(mu, sigma)
         # mu = self.bn1(mu)
-        mu, sigma = self.fullyCon2.forward(mu, sigma)
+        mu, sigma = self.fullyCon2.forward(mu.to('cuda:1'), sigma.to('cuda:1'))
         mu, sigma = self.softmax.forward(mu, sigma)
 
         return mu, sigma
 
     def nll_gaussian(self, y_pred_mean, y_pred_sd, y_test):
         thing = torch.tensor(1e-3)
-        y_pred_sd_inv = torch.inverse(y_pred_sd + torch.diag(thing.repeat([self.fullyCon2.out_features])))
+        y_pred_sd_inv = torch.inverse(y_pred_sd + torch.diag(thing.repeat([self.fullyCon2.out_features])).to(y_pred_sd.device))
         mu_ = y_pred_mean - y_test
         mu_sigma = torch.bmm(mu_.unsqueeze(1), y_pred_sd_inv)
         ms = 0.5 * torch.bmm(mu_sigma, mu_.unsqueeze(2)).squeeze(1) + 0.5 * torch.log(
-            torch.det(y_pred_sd + torch.diag(thing.repeat([self.fullyCon2.out_features])))).unsqueeze(1)
+            torch.det(y_pred_sd + torch.diag(thing.repeat([self.fullyCon2.out_features])).to(y_pred_sd.device))).unsqueeze(1)
         ms = ms.mean()
         return ms
 
@@ -66,7 +68,7 @@ class EVINet(nn.Module):
         output_sigma_clamp = torch.clamp(output_sigma, 1e-10, 1e+10)
         tau = 0.002
         log_likelihood = self.nll_gaussian(output_mean, output_sigma_clamp, label)
-        loss_value = log_likelihood + tau * (self.fullyCon1.kl_loss_term() + self.fullyCon2.kl_loss_term())
+        loss_value = log_likelihood + tau * (self.fullyCon1.kl_loss_term().to('cuda:1')+ self.fullyCon2.kl_loss_term())
         return loss_value
 
     def batch_accuracy(self, output_mean, label):
@@ -79,13 +81,13 @@ class EVINet(nn.Module):
         predicted_labels = []
         testset = data_loader(X, y)
         # noinspection PyArgumentList
-        testloader = DataLoader(testset, batch_size=256, shuffle=False, sampler=None,
+        testloader = DataLoader(testset, batch_size=self.batch_size, shuffle=False, sampler=None,
                                 batch_sampler=None, num_workers=0, collate_fn=None,
                                 pin_memory=False, drop_last=False, timeout=0,
                                 worker_init_fn=None)
         for itr, (test_data, test_targets) in enumerate(testloader):
             test_data = test_data.float().to(torch.device('cuda:0'))
-            y_pred, sig = self(test_data)
+            y_pred, sig = self.forward(test_data)
             predicted_batch = torch.argmax(y_pred, dim=1).cpu().numpy()
             predicted_labels.extend(predicted_batch.tolist())
 

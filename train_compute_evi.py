@@ -10,7 +10,7 @@ import torch
 from sklearn.datasets import make_classification
 from sklearn.preprocessing import StandardScaler, normalize
 from sklearn.model_selection import train_test_split
-import evi_influence
+import evi_influence_batch
 import time
 import os
 import gc
@@ -19,9 +19,10 @@ import EVINet
 from torch.utils.data import DataLoader, Dataset
 from eli5.permutation_importance import get_score_importances
 
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 
+
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
+os.environ["CUDA_VISIBLE_DEVICES"] = '6,7'
 
 class data_loader(Dataset):
     def __init__(self, X, y):
@@ -39,11 +40,11 @@ class data_loader(Dataset):
 
 def main():
     print('Total memory allocated: ' + str(torch.cuda.memory_allocated()))
-    # n_samples = np.random.randint(100, 100000)
-    n_samples = 500
+    n_samples = np.random.randint(100, 100000)
+    # n_samples = 100000
     print('Number of Samples in DS: ' + str(n_samples))
-    # n_feats = np.random.choice([10, 20, 50, 100, 200, 500], 1).item()
-    n_feats = 100
+    n_feats = np.random.choice([10, 20, 50, 100, 200, 500], 1).item()
+    # n_feats = 500
     n_clusters = np.random.randint(2, 14)
     sep = 5 * np.random.random_sample()
     hyper = np.random.choice([True, False], 1).item()
@@ -51,27 +52,20 @@ def main():
     X, y = make_classification(n_samples, n_feats, n_feats // 2, 0, 0, 2, n_clusters, None, 0, sep, True, 0, 1, hyper)
     X, x_test, y, y_test = train_test_split(X, y, test_size=0.2)
 
-    btchsz = 256
+    btchsz = [len(X), len(X), len(X), len(X), len(X), len(X), len(X), len(X), len(X), len(X), 25000, 20000, 10000, 5000]
+    params = [5, 10, 25, 50, 100, 500, 1000, 2000, 5000, 10000, 25000, 30000, 35000, 40000]
+
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
     x_test = scaler.transform(x_test)
 
     trainset = data_loader(X, y)
     testset = data_loader(x_test, y_test)
-    # noinspection PyArgumentList
-    trainloader = DataLoader(trainset, batch_size=btchsz, shuffle=False, sampler=None,
-                             batch_sampler=None, num_workers=0, collate_fn=None,
-                             pin_memory=False, drop_last=False, timeout=0,
-                             worker_init_fn=None)
-    testloader = DataLoader(testset, batch_size=btchsz, shuffle=False, sampler=None,
-                             batch_sampler=None, num_workers=0, collate_fn=None,
-                             pin_memory=False, drop_last=False, timeout=0,
-                             worker_init_fn=None)
-    device = torch.device('cuda:0')
-    if (torch.cuda.is_available()):
+
+    if torch.cuda.is_available():
         print('Using device:', torch.cuda.get_device_name(torch.cuda.current_device()))
 
-    no_epochs = 10
+    no_epochs = 5
 
     accs = []
     infl = []
@@ -80,11 +74,14 @@ def main():
     for i in range(len(params)):
         start_time = time.time()
         torch.cuda.empty_cache()
-        model = EVINet.EVINet(n_feats, params[i])
+        iter = i
+        model = EVINet.EVINet(n_feats, params[iter],  batch_size=btchsz[iter])
         optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-        if device:
-            model.to(device)
-            print('Moved to GPU')
+        trainloader = DataLoader(trainset, batch_size=btchsz[iter], shuffle=False)
+
+        testloader = DataLoader(testset, batch_size=btchsz[iter], shuffle=False)
+
+        scaler = torch.cuda.amp.GradScaler()
 
         for epoch in range(no_epochs):
             total_train_loss = 0
@@ -92,25 +89,23 @@ def main():
 
                 model.train()
 
-                train_data = train_data.to(device)
-                train_targets = train_targets.to(device)
                 targets_hot = torch.nn.functional.one_hot(train_targets, 2)
 
                 optimizer.zero_grad()
 
-                pred, sig = model(train_data)
+                with torch.cuda.amp.autocast(enabled=False):
+                    pred, sig = model(train_data)
 
-                loss = model.batch_loss(pred, sig, targets_hot)
+                loss = model.batch_loss(pred, sig, targets_hot.to('cuda:1'))
                 total_train_loss += loss.item()
 
-                loss.backward()
-                optimizer.step()
+                scaler.scale(loss).backward()
+                scaler.step(optimizer)
+                scaler.update()
             if epoch != 0 and (epoch % 1 == 0):
                 print('Epoch: ' + str(epoch) + '/' + str(no_epochs)+', Train Loss: '+str(total_train_loss))
         print("Total Train Time: "+str(time.time() - start_time))
         # validation
-        test_data = torch.from_numpy(x_test).float().to(device)
-        test_targets = torch.from_numpy(y_test).long().to(device)
         model.eval()
         test_acc = model.score(x_test, y_test)
         accs.append(test_acc)
@@ -118,12 +113,14 @@ def main():
 
         inform_feats = set(range(n_feats // 2))
 
-
-        eqn_5_smooth = evi_influence.influence(X, y, x_test,
-                                                 y_test, model, model.fullyCon2.mean_fc.weight)
+        model.zero_grad()
+        del train_data, train_targets, loss, optimizer
+        torch.cuda.empty_cache()
+        eqn_5_smooth = evi_influence_batch.influence(X, y, x_test,
+                                                     y_test, model, model.fullyCon2.mean_fc.weight, btchsz=btchsz[iter])
         eqn_5_smooth = np.mean(normalize(np.vstack(eqn_5_smooth)), axis=0)
         loss_acc = len(inform_feats.intersection(set(np.argsort(abs(eqn_5_smooth))[::-1][:n_feats // 2]))) / (
-                    n_feats // 2)
+                n_feats // 2)
         infl.append(loss_acc)
 
         start_time = time.time()
@@ -135,11 +132,9 @@ def main():
         permute.append(perm_acc)
 
         print('Inner Loop ' + str(i + 1) + '/' + str(len(params)) + ' Finished')
-        del model, train_data, train_targets, loss, optimizer
+        del model
         gc.collect()
         torch.cuda.empty_cache()
-
-        print('Total memory allocated: ' + str(torch.cuda.memory_allocated(device)))
 
     return np.asarray(accs), np.asarray(infl), np.asarray(permute)
 
@@ -147,8 +142,8 @@ def main():
 if __name__ == "__main__":
     np.random.seed(1234567890)
     torch.manual_seed(1234567890)
-    n_experiments = 1000
-    params = [5, 10, 25, 50, 100, 500, 1000, 2000, 5000, 10000]
+    n_experiments = 600
+    params = [5, 10, 25, 50, 100, 200]
     outputs = np.empty((n_experiments, 3, len(params)))
     for i in range(n_experiments):
         outputs[i, 0, :], outputs[i, 1, :], outputs[i, 2, :] = main()

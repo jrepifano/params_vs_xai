@@ -17,6 +17,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JupyterTrust" id="0b40252a-b010-4704-90de-d0d531efd998" />
   <component name="ProjectId" id="1iExHCtNoJMxmyRa2nbpLuqhDTW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -24,9 +25,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="web.server" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -43,6 +52,50 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.train_compute_evi">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="params_vs_xai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="plot_figures" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="params_vs_xai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="sftp://epifanoj0@lambda01.rowan.edu:22/home/epifanoj0/.virtualenvs/params/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plot_figures.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="train_compute" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="params_vs_xai" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -50,11 +103,31 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="E:\Documents\GitHub\params_vs_xai\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="sftp://epifanoj0@lambda01.rowan.edu:22/home/epifanoj0/.virtualenvs/params/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_compute.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_compute" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="params_vs_xai" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="sftp://epifanoj0@lambda01.rowan.edu:22/home/epifanoj0/.virtualenvs/params/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_compute.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
@@ -71,11 +144,12 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="sftp://epifanoj0@lambda01.rowan.edu:22/home/epifanoj0/.virtualenvs/params/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_compute_evi.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -85,9 +159,16 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.train_compute" />
+      <item itemvalue="Python.plot_figures" />
+      <item itemvalue="Python.train_compute_evi" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.train_compute_evi" />
+        <item itemvalue="Python.plot_figures" />
+        <item itemvalue="Python.train_compute" />
       </list>
     </recent_temporary>
   </component>
@@ -99,82 +180,139 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601486463299</updated>
+      <workItem from="1602098521209" duration="2783000" />
+      <workItem from="1602101323692" duration="1136000" />
+      <workItem from="1602102471915" duration="1838000" />
+      <workItem from="1602107559111" duration="6000" />
+      <workItem from="1602122932362" duration="529000" />
+      <workItem from="1602135781719" duration="2000" />
+      <workItem from="1602176627453" duration="6675000" />
+      <workItem from="1602211229266" duration="611000" />
+      <workItem from="1602278031506" duration="3009000" />
+      <workItem from="1602525536893" duration="3763000" />
+      <workItem from="1602533426946" duration="2000" />
+      <workItem from="1602541545512" duration="5116000" />
+      <workItem from="1602548292845" duration="6838000" />
+      <workItem from="1602592280858" duration="747000" />
+      <workItem from="1602603802490" duration="614000" />
+      <workItem from="1602687169604" duration="8582000" />
+      <workItem from="1602696325559" duration="2040000" />
+      <workItem from="1602699098215" duration="3000" />
+      <workItem from="1603304714818" duration="3892000" />
+      <workItem from="1603375595182" duration="2224000" />
     </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="583" y="280" width="1092" height="834" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1601584367421">
+    <state x="755" y="371" key="#Deployment" timestamp="1602697524233">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="583" y="280" width="1092" height="834" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601584367421" />
-    <state x="1010" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1601957271597">
+    <state x="755" y="371" key="#Deployment/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602697524233" />
+    <state x="740" y="357" key="#SSH_Configurations" timestamp="1602697454872">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1010" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601957271597" />
+    <state x="740" y="357" key="#SSH_Configurations/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602697454872" />
+    <state x="583" y="280" width="1092" height="882" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603381284412">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="583" y="280" width="1092" height="882" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603381284412" />
+    <state x="1010" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1602104288840">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1010" y="447" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602104288840" />
     <state x="667" y="453" key="#xdebugger.XInspectDialog" timestamp="1601492679964">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="667" y="453" key="#xdebugger.XInspectDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601492679964" />
+    <state x="92" y="92" width="2376" height="1216" key="DirDiffDialog" timestamp="1602099415131">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="92" y="92" width="2376" height="1216" key="DirDiffDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602099415131" />
     <state x="789" y="470" key="EnvironmentVariablesDialog" timestamp="1601486591120">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="789" y="470" key="EnvironmentVariablesDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601486591120" />
-    <state x="701" y="458" key="FileChooserDialogImpl" timestamp="1602003581016">
+    <state x="701" y="458" key="FileChooserDialogImpl" timestamp="1603308296153">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="701" y="458" key="FileChooserDialogImpl/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602003581016" />
-    <state width="2539" height="375" key="GridCell.Tab.0.bottom" timestamp="1602093791983">
+    <state x="701" y="458" key="FileChooserDialogImpl/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603308296153" />
+    <state width="1258" height="382" key="GridCell.Tab.0.bottom" timestamp="1603391053506">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="375" key="GridCell.Tab.0.bottom/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
-    <state width="2539" height="375" key="GridCell.Tab.0.center" timestamp="1602093791982">
+    <state width="1258" height="382" key="GridCell.Tab.0.bottom/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551199113" />
+    <state width="1258" height="382" key="GridCell.Tab.0.bottom/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
+    <state width="1258" height="382" key="GridCell.Tab.0.center" timestamp="1603391053506">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="375" key="GridCell.Tab.0.center/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791982" />
-    <state width="2539" height="375" key="GridCell.Tab.0.left" timestamp="1602093791982">
+    <state width="1258" height="382" key="GridCell.Tab.0.center/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551199113" />
+    <state width="1258" height="382" key="GridCell.Tab.0.center/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
+    <state width="1258" height="382" key="GridCell.Tab.0.left" timestamp="1603391053506">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="375" key="GridCell.Tab.0.left/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791982" />
-    <state width="2539" height="375" key="GridCell.Tab.0.right" timestamp="1602093791982">
+    <state width="1258" height="382" key="GridCell.Tab.0.left/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551199113" />
+    <state width="1258" height="382" key="GridCell.Tab.0.left/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
+    <state width="1258" height="382" key="GridCell.Tab.0.right" timestamp="1603391053506">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="375" key="GridCell.Tab.0.right/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791982" />
-    <state width="2539" height="375" key="GridCell.Tab.1.bottom" timestamp="1602093791983">
+    <state width="1258" height="382" key="GridCell.Tab.0.right/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551199113" />
+    <state width="1258" height="382" key="GridCell.Tab.0.right/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
+    <state width="1258" height="382" key="GridCell.Tab.1.bottom" timestamp="1603391053506">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="375" key="GridCell.Tab.1.bottom/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
-    <state width="2539" height="375" key="GridCell.Tab.1.center" timestamp="1602093791983">
+    <state width="1258" height="382" key="GridCell.Tab.1.bottom/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551198982" />
+    <state width="1258" height="382" key="GridCell.Tab.1.bottom/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
+    <state width="1258" height="382" key="GridCell.Tab.1.center" timestamp="1603391053506">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="375" key="GridCell.Tab.1.center/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
-    <state width="2539" height="375" key="GridCell.Tab.1.left" timestamp="1602093791983">
+    <state width="1258" height="382" key="GridCell.Tab.1.center/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551198982" />
+    <state width="1258" height="382" key="GridCell.Tab.1.center/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
+    <state width="1258" height="382" key="GridCell.Tab.1.left" timestamp="1603391053506">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="375" key="GridCell.Tab.1.left/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
-    <state width="2539" height="375" key="GridCell.Tab.1.right" timestamp="1602093791983">
+    <state width="1258" height="382" key="GridCell.Tab.1.left/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551198982" />
+    <state width="1258" height="382" key="GridCell.Tab.1.left/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
+    <state width="1258" height="382" key="GridCell.Tab.1.right" timestamp="1603391053506">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="2539" height="375" key="GridCell.Tab.1.right/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602093791983" />
-    <state x="546" y="357" key="SettingsEditor" timestamp="1601943298025">
+    <state width="1258" height="382" key="GridCell.Tab.1.right/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551198982" />
+    <state width="1258" height="382" key="GridCell.Tab.1.right/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
+    <state x="440" y="213" width="1236" height="710" key="SettingsEditor" timestamp="1603381479278">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="546" y="357" key="SettingsEditor/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601943298025" />
-    <state width="1288" height="708" key="XDebugger.FullValuePopup" timestamp="1601956957068">
+    <state x="440" y="213" width="1236" height="710" key="SettingsEditor/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603381479278" />
+    <state width="1288" height="708" key="XDebugger.FullValuePopup" timestamp="1602095562478">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1288" height="708" key="XDebugger.FullValuePopup/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601956957068" />
+    <state width="1288" height="708" key="XDebugger.FullValuePopup/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602095562478" />
     <state x="842" y="429" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1601492370936">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="842" y="429" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1601492370936" />
+    <state x="932" y="442" width="400" height="699" key="ftp.server.browser" timestamp="1602697522586">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="932" y="442" width="400" height="699" key="ftp.server.browser/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602697522586" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train_compute.py</url>
+          <line>168</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/train_compute_evi.py</url>
-          <line>136</line>
-          <option name="timeStamp" value="20" />
+          <line>138</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/train_compute_evi.py</url>
+          <line>95</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -185,5 +323,10 @@
         </breakpoint>
       </default-breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/params_vs_xai$train_compute_evi.coverage" NAME="train_compute_evi Coverage Results" MODIFIED="1603381174203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/params_vs_xai$plot_figures.coverage" NAME="plot_figures Coverage Results" MODIFIED="1602689379165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/params_vs_xai$train_compute.coverage" NAME="train_compute Coverage Results" MODIFIED="1602697288304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

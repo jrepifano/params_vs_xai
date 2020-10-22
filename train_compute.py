@@ -2,7 +2,7 @@
 """
 Created on Wed Sep 30 13:10:59 2020
 
-@author: Jake
+@author: Jak
 """
 
 import numpy as np
@@ -10,43 +10,69 @@ import torch
 from sklearn.datasets import make_classification
 from sklearn.preprocessing import StandardScaler, normalize
 from sklearn.model_selection import train_test_split
-import smoothInfluence
+import influence_batch
 import time
 import os
 import gc
 from numpy.random import RandomState
 from eli5.permutation_importance import get_score_importances
+from torch.utils.data import DataLoader, Dataset
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = '0'
+os.environ["CUDA_VISIBLE_DEVICES"] = '6,7'
 
 class Vanilla(torch.nn.Module):
-    def __init__(self, n_feats, num_nodes):
+    def __init__(self, n_feats, num_nodes, batch_size):
         super(Vanilla, self).__init__()
-        self.linear_1 = torch.nn.Linear(n_feats, num_nodes)
-        self.linear_2 = torch.nn.Linear(num_nodes, 2)
+        self.batch_size = batch_size
+        self.linear_1 = torch.nn.Linear(n_feats, num_nodes).to('cuda:0')
+        self.linear_2 = torch.nn.Linear(num_nodes, 2).to('cuda:1')
         self.selu = torch.nn.SELU()
         self.softmax = torch.nn.Softmax(dim=1)
 
     def forward(self, x):
-        x = self.linear_1(x)
+        x = self.linear_1(x.to('cuda:0'))
         x = self.selu(x)
-        x = self.linear_2(x)
+        x = self.linear_2(x.to('cuda:1'))
         pred = self.softmax(x)
         return pred
 
     def score(self, X, y):
-        X = torch.from_numpy(X).float().to(torch.device('cuda:0'))
-        y_pred = self(X)
-        pred_lab = torch.argmax(y_pred, dim=1).cpu().numpy()
-        total = len(np.where(y == pred_lab)[0])
+        predicted_labels = []
+        testset = data_loader(X, y)
+        # noinspection PyArgumentList
+        testloader = DataLoader(testset, batch_size=self.batch_size, shuffle=False, sampler=None,
+                                batch_sampler=None, num_workers=0, collate_fn=None,
+                                pin_memory=False, drop_last=False, timeout=0,
+                                worker_init_fn=None)
+        for itr, (test_data, test_targets) in enumerate(testloader):
+            test_data = test_data.float()
+            y_pred = self.forward(test_data)
+            predicted_batch = torch.argmax(y_pred, dim=1).cpu().numpy()
+            predicted_labels.extend(predicted_batch.tolist())
+
+        total = len(np.where(y == predicted_labels)[0])
         accuracy = total / len(X)
         return accuracy
 
+class data_loader(Dataset):
+    def __init__(self, X, y):
+        self.X = torch.from_numpy(X).float()
+        self.y = torch.from_numpy(y).long()
+
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, index):
+        target = self.y[index]
+        data_val = self.X[index, :]
+        return data_val, target
 
 def main():
-    print('Total memory allocated: ' + str(torch.cuda.memory_allocated()))
+    # print('Total memory allocated: ' + str(torch.cuda.memory_allocated()))
     n_samples = np.random.randint(100, 100000)
+    # n_samples = 100000
+    # n_feats = 500
     print('Number of Samples in DS: ' + str(n_samples))
     n_feats = np.random.choice([10, 20, 50, 100, 200, 500], 1).item()
     n_clusters = np.random.randint(2, 14)
@@ -59,53 +85,56 @@ def main():
     scaler = StandardScaler()
     X = scaler.fit_transform(X)
     x_test = scaler.transform(x_test)
-    device = torch.device('cuda:0')
+    device = 'cuda:0'
     if (torch.cuda.is_available()):
         print('Using device:', torch.cuda.get_device_name(torch.cuda.current_device()))
 
     no_epochs = 100
+    btchsz = [len(X), len(X), len(X), len(X), len(X), len(X), len(X), len(X), len(X), len(X), 25000, 20000, 10000, 5000]
+    params = [5, 10, 25, 50, 100, 500, 1000, 2000, 5000, 10000, 25000, 30000, 35000, 40000]
+
+    trainset = data_loader(X, y)
+    testset = data_loader(x_test, y_test)
 
     accs = []
     infl = []
     permute = []
 
-    X = torch.from_numpy(X)
-    y = torch.from_numpy(y)
-
-    params = [5, 10, 25, 50, 100, 500, 1000, 2000, 5000, 10000]
-
     for i in range(len(params)):
         start_time = time.time()
         torch.cuda.empty_cache()
-        model = Vanilla(n_feats, params[i])
+        iter = i
+        model = Vanilla(n_feats, params[iter], batch_size=btchsz[iter])#.half()
         criterion = torch.nn.CrossEntropyLoss()
         optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+        trainloader = DataLoader(trainset, batch_size=btchsz[iter], shuffle=False)
+        testloader = DataLoader(testset, batch_size=btchsz[iter], shuffle=False)
         if device:
-            model.to(device)
+            # model.to(device)
             print('Moved to GPU')
-
+            scaler = torch.cuda.amp.GradScaler()
         for epoch in range(no_epochs):
             total_train_loss = 0
-
             model.train()
+            for batchidx, (train_data, train_targets) in enumerate(trainloader):
 
-            image = (X).float().to(device)
-            label = y.long().to(device)
+                optimizer.zero_grad()
 
-            optimizer.zero_grad()
+                with torch.cuda.amp.autocast(enabled=False):
+                    pred = model(train_data)
+                # pred = model(train_data.half())
 
-            pred = model(image)
+                loss = criterion(pred, train_targets.to('cuda:1'))
+                total_train_loss += loss.item()
 
-            loss = criterion(pred, label)
-            total_train_loss += loss.item()
-
-            loss.backward()
-            optimizer.step()
-            if epoch != 0 and (epoch % 1 == 0):
-                print('Epoch: ' + str(epoch) + '/' + str(no_epochs)+', Train Loss: '+str(total_train_loss))
+                scaler.scale(loss).backward()
+                scaler.step(optimizer)
+                scaler.update()
+            if epoch != 0 and (epoch % 25 == 0):
+                print('Epoch: ' + str(epoch+1) + '/' + str(no_epochs) + ', Train Loss: ' + str(total_train_loss))
+        print("Total Train Time: " + str(time.time() - start_time))
         # validation
         model.eval()
-        print(time.time() - start_time)
         image_test = torch.from_numpy(x_test).float().to(device)
         label_test = torch.from_numpy(y_test).long().to(device)
 
@@ -116,8 +145,8 @@ def main():
 
         inform_feats = set(range(n_feats // 2))
 
-        eqn_5_smooth = smoothInfluence.influence(image.detach(), label.detach(), image_test.detach(),
-                                                 label_test.detach(), model, model.linear_2.weight)
+        eqn_5_smooth = influence_batch.influence(X, y, x_test,
+                                                     y_test, model, model.linear_2.weight, btchsz=btchsz[iter])
         eqn_5_smooth = np.mean(normalize(np.vstack(eqn_5_smooth)), axis=0)
         loss_acc = len(inform_feats.intersection(set(np.argsort(abs(eqn_5_smooth))[::-1][:n_feats // 2]))) / (
                     n_feats // 2)
@@ -131,33 +160,24 @@ def main():
         permute.append(perm_acc)
 
         print('Inner Loop ' + str(i + 1) + '/' + str(len(params)) + ' Finished')
-        del model, image, label, pred_test, pred, loss, optimizer, image_test, label_test
+        del model, train_data, train_targets, pred_test, pred, loss, optimizer, image_test, label_test
         gc.collect()
         torch.cuda.empty_cache()
 
-        print('Total memory allocated: ' + str(torch.cuda.memory_allocated(device)))
+        # print('Total memory allocated: ' + str(torch.cuda.memory_allocated(device)))
 
-    return np.asarray(test_acc), np.asarray(infl), np.asarray(permute)
+    return np.asarray(accs), np.asarray(infl), np.asarray(permute)
 
 
 if __name__ == "__main__":
     np.random.seed(1234567890)
     torch.manual_seed(1234567890)
     n_experiments = 1000
-    params = [5, 10, 25, 50, 100, 500, 1000, 2000, 5000, 10000]
+    params = [5, 10, 25, 50, 100, 500, 1000, 2000, 5000, 10000, 25000, 30000, 35000, 40000]
     outputs = np.empty((n_experiments, 3, len(params)))
     for i in range(n_experiments):
         outputs[i, 0, :], outputs[i, 1, :], outputs[i, 2, :] = main()
         print('Outer Loop ' + str(i + 1) + '/' + str(n_experiments) + ' Finished')
         if i != 0 and ((i < 200 and (i % 10 == 0)) or (i >= 200 and (i % 100 == 0))):
             np.save('outputs_' + str(i) + str('.npy'), outputs)
-    # rocs = np.mean(np.squeeze(outputs[:, 0, :]),axis=0)
-    # infl = np.mean(np.squeeze(outputs[:, 1, :]), axis=0)
-    # permute = np.mean(np.squeeze(outputs[:, 2, :]), axis=0)
-    # plt.plot(params, rocs, label='ROC AUC')
-    # plt.plot(params, infl, label='Influence Accuracy')
-    # plt.plot(params, permute, label='Permutation Importance Accuracy')
-    # plt.legend()
-    # plt.xlabel('Number of Hidden Nodes')
-    # plt.show()
     np.save('outputs_final.npy', outputs)
