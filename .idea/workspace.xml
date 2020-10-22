@@ -35,7 +35,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="web.server" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -160,15 +160,14 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.train_compute" />
       <item itemvalue="Python.plot_figures" />
+      <item itemvalue="Python.train_compute" />
       <item itemvalue="Python.train_compute_evi" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.train_compute_evi" />
         <item itemvalue="Python.plot_figures" />
-        <item itemvalue="Python.train_compute" />
       </list>
     </recent_temporary>
   </component>
@@ -200,6 +199,7 @@
       <workItem from="1602699098215" duration="3000" />
       <workItem from="1603304714818" duration="3892000" />
       <workItem from="1603375595182" duration="2224000" />
+      <workItem from="1603404822746" duration="199000" />
     </task>
     <servers />
   </component>
@@ -279,14 +279,18 @@
     </state>
     <state width="1258" height="382" key="GridCell.Tab.1.right/0.0.2560.1400/-3840.0.2560.1400@-3840.0.2560.1400" timestamp="1602551198982" />
     <state width="1258" height="382" key="GridCell.Tab.1.right/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603391053506" />
-    <state x="440" y="213" width="1236" height="710" key="SettingsEditor" timestamp="1603381479278">
+    <state x="440" y="213" width="1236" height="710" key="SettingsEditor" timestamp="1603404933586">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="440" y="213" width="1236" height="710" key="SettingsEditor/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603381479278" />
+    <state x="440" y="213" width="1236" height="710" key="SettingsEditor/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603404933586" />
     <state width="1288" height="708" key="XDebugger.FullValuePopup" timestamp="1602095562478">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1288" height="708" key="XDebugger.FullValuePopup/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1602095562478" />
+    <state x="1152" y="544" key="cloudConfig.SelfSettingsDialog" timestamp="1603404988865">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1152" y="544" key="cloudConfig.SelfSettingsDialog/0.0.2560.1400/-3840.0.2560.1400@0.0.2560.1400" timestamp="1603404988865" />
     <state x="842" y="429" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1601492370936">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
