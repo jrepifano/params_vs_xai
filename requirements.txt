@@ -1,6 +1,7 @@
 attrs==20.2.0
 certifi==2020.6.20
 cycler==0.10.0
+dataclasses==0.6
 eli5==0.10.1
 future==0.18.2
 graphviz==0.14.1
@@ -21,6 +22,8 @@ six==1.15.0
 skorch==0.9.0
 tabulate==0.8.7
 threadpoolctl==2.1.0
-torch==1.6.0
-torchvision==0.7.0
+torch==1.7.0+cu110
+torchaudio==0.7.0
+torchvision==0.8.1+cu110
 tqdm==4.50.0
+typing-extensions==3.7.4.3
